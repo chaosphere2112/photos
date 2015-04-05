@@ -19,11 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'lj_d_hx(%+nb^dl#4w1n+1o9v&)f=jrlc=d0e1o3ot-^lkc&7j'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -74,13 +69,7 @@ WSGI_APPLICATION = 'photos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+from local_settings import *
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
