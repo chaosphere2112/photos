@@ -28,7 +28,6 @@ def set_captions(request):
 				file_num = key[len("file_name_"):]
 				file_name = get_valid_filename(request.POST[key])
 				file_caption = request.POST["caption_%s" % file_num]
-				print file_name
 				fileobj = Photo.objects.get(photo=file_name)
 				fileobj.caption = file_caption
 				fileobj.display = True
@@ -43,8 +42,22 @@ def upload_action(request):
 			new_photo = Photo(photo=request.FILES[key])
 			new_photo.save()
 		message = { "status": "success"}
-		return HttpResponse(json.dumps(message), content_type="application/json");
-	
+		return HttpResponse(json.dumps(message), content_type="application/json")
+	elif request.method == "DELETE":
+		try:
+			req_data = json.loads(request.body)
+			if "filename" in req_data:
+				f = get_valid_filename(req_data["filename"])
+				files = Photo.objects.filter(photo=f)
+				for fileobj in files:
+					if fileobj.display == False:
+						fileobj.delete()
+				message = {"status": "success"}
+				return HttpResponse(json.dumps(message), content_type="application/json")
+			else:
+				return error()
+		except ValueError:
+			return error()
 	return error()
 
 

@@ -12,7 +12,7 @@ function init_uploader() {
     template = template.getElementsByClassName("image_wrapper")[0];
 
     var form = document.getElementById("upload_form");
-    var csrf_token = form.getElementsByTagName("input")[0].value;
+    var csrf_token = getCookie("csrftoken");
 
 
     function dragenter(e) {
@@ -65,7 +65,7 @@ function init_uploader() {
             save_button.value = "Save Captions";
             form.appendChild(save_button);
         } else {
-            save_button = form.getElementById("submit_button");
+            save_button = form.getElementsByTagName("input").namedItem("submit_button");
         }
 
         for (var i = 0; i < files.length; i++) {
@@ -83,6 +83,7 @@ function init_uploader() {
 
             var inputs = form_elements.getElementsByTagName("input");
             inputs[0].name = "file_name_" + file_num;
+            inputs[0].value = file.name;
             inputs[1].name = "caption_" + file_num;
 
             var remove = form_elements.getElementsByTagName("button")[0];
@@ -107,12 +108,31 @@ function init_uploader() {
 
         xhr.send(formData);  // multipart/form-data
     }
-
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
     function removeElementFunc(el) {
         return function(e) {
             form.removeChild(el);
+
+            var xhr = new XMLHttpRequest();
+
+            var name = el.getElementsByTagName("input")[0].value;
+            
+            xhr.open('DELETE', "/photos/upload", true);
+            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+
+            xhr.onload = function(e) { 
+                result = JSON.parse(e.currentTarget.responseText);
+                console.log(result);
+            };
+
+            xhr.send(JSON.stringify({"filename": name}));
         }
     }
+
 }
 
 init_uploader();
