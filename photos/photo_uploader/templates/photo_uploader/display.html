@@ -1,0 +1,18 @@
+{% if photos %}
+    <ul class="photo_display">
+    {% for photo in photos %}
+        <li class="photo">
+        	<figure>
+                {% with MEDIA_URL|add:photo.photo.name as url %}
+        		<img src="{{ url }}" width="{{photo.width}}" height="{{photo.height}}">
+                {% endwith %}
+        		<figcaption>
+        			{{ photo.caption }}
+        		</figcaption>
+        	</figure>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No photos are available.</p>
+{% endif %}
