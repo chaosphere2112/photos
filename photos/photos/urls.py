@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-import photo_uploader.views
+import photo_uploader.urls
+from photo_uploader.views import view_photos
 
 urlpatterns = [
     # Examples:
@@ -8,5 +9,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^photos/', photo_uploader.views.view_photos)
+    url(r'^photos/', include(photo_uploader.urls)),
+    url(r'^$', view_photos),
 ]

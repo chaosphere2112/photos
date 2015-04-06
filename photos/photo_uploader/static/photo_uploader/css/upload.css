@@ -1,0 +1,24 @@
+.image_wrapper {
+	height:200px;
+	width:100%;
+}
+
+#upload_block {
+	background-color:#DDD;
+	height:500px;
+}
+
+.dragged_over {
+	background-color:#BBB;
+}
+
+.thumbnail {
+	max-width:150px;
+	max-height:150px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.image_wrapper > input {
+	height:150px;
+}

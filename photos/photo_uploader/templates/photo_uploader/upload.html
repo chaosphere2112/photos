@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'photo_uploader/css/upload.css' %}" />
+
+<form method="POST" formenctype="multipart/form-data" action="/photos/save_caption" id="upload_form">{% csrf_token %}</form>
+
+<div id="upload_block">
+	<h1>Drop Files Here</h1>
+</div>
+
+<div id="image_form_template" style="display:none">
+	<div class="image_wrapper">
+		<img class="thumbnail">
+		<input type="hidden" name="file_name_XX">
+		<input type="text" name="caption_XX">
+		<button type="button">Remove</button>
+	</div>
+</div>
+
+<script src="{% static 'photo_uploader/js/upload.js' %}" type="text/javascript"></script>

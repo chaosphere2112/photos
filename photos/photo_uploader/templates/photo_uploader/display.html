@@ -3,9 +3,7 @@
     {% for photo in photos %}
         <li class="photo">
         	<figure>
-                {% with MEDIA_URL|add:photo.photo.name as url %}
-        		<img src="{{ url }}" width="{{photo.width}}" height="{{photo.height}}">
-                {% endwith %}
+        		<img src="{{ photo.photo.url }}" width="{{photo.width}}" height="{{photo.height}}">
         		<figcaption>
         			{{ photo.caption }}
         		</figcaption>
