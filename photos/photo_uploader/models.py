@@ -7,3 +7,7 @@ class Photo(models.Model):
 	width   = models.IntegerField(null=True, blank=True)
 	height  = models.IntegerField(null=True, blank=True)
 	display = models.BooleanField(default=False)
+
+	@property
+	def aspect_ratio(self):
+		return self.width / float(self.height)

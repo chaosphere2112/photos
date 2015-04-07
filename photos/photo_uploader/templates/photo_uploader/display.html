@@ -1,16 +1,22 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'photo_uploader/css/display.css' %}" />
+
 {% if photos %}
-    <ul class="photo_display">
+    <div id="photo_container">
     {% for photo in photos %}
-        <li class="photo">
-        	<figure>
-        		<img src="{{ photo.photo.url }}" width="{{photo.width}}" height="{{photo.height}}">
-        		<figcaption>
-        			{{ photo.caption }}
-        		</figcaption>
-        	</figure>
-        </li>
+        {% if photo.aspect_ratio > 1 %}
+        <figure class="photo landscape">
+        {% else %}
+        <figure class="photo portrait">
+        {% endif %}
+            <img src="{{ photo.photo.url }}">
+            <figcaption>
+                {{ photo.caption }}
+            </figcaption>
+        </figure>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>No photos are available.</p>
 {% endif %}

@@ -106,7 +106,7 @@ function init_uploader() {
             console.log(result);
         };
 
-        xhr.send(formData);  // multipart/form-data
+        xhr.send(formData);
     }
     function getCookie(name) {
         var value = "; " + document.cookie;
