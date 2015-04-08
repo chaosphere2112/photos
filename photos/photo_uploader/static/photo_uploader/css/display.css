@@ -1,47 +1,9 @@
-#photo_container {
-	-webkit-column-count: 4;
-	-moz-column-count: 4;
-	column-count: 4;
-	column-gap: 1em;
-}
-
-@media(max-width: 1310px) {
-	#photo_container {
-		-webkit-column-count: 3;
-		-moz-column-count: 3;
-		column-count: 3;
-		column-gap: 1em;
-	}	
-}
-
-@media(max-width: 800px) {
-	#photo_container {
-		-webkit-column-count: 2;
-		-moz-column-count: 2;
-		column-count: 2;
-		column-gap: 1em;
-	}
-}
-
-@media(max-width: 600px) {
-	#photo_container {
-		-webkit-column-count: 1;
-		-moz-column-count: 1;
-		column-count: 1;
-		column-gap: 1em;
-	}
-}
-
 .photo {
 	background-color:#CCC;
 	border-radius:10px;
 	padding:10px;
 	margin:0;
 	margin-top:1em;
-}
-
-.photo:first-child {
-	margin-top:0;
 }
 
 .photo > img {
