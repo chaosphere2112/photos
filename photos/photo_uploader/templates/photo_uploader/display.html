@@ -24,12 +24,12 @@
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="{% static 'photo_uploader/js/blocksit.min.js' %}"></script>
 <script>
-$("body").ready(function(){
-    var images = $(".photo > img");
-    images.load(function(){
-        $("#photo_container").BlocksIt({
-            blockElement: ".photo",
-        });
+function setup_blocksit() {
+    $("#photo_container").BlocksIt({
+        blockElement: ".photo",
     });
-});
+};
+
+setTimeout(setup_blocksit, 500);
+
 </script>
