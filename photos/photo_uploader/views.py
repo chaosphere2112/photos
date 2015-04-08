@@ -10,7 +10,7 @@ def view_photos(request):
 		if request.user.is_staff:
 			photos = Photo.objects.all()
 		else:
-			photos = Photo.objects.get(display=True)
+			photos = Photo.objects.filter(display=True)
 		return render(request, "photo_uploader/display.html", RequestContext(request, {"photos": photos}))
 	except Photo.DoesNotExist:
 		return render(request, "photo_uploader/display.html", RequestContext(request, {"photos": []}))
