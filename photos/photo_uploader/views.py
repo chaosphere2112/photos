@@ -7,6 +7,7 @@ import json
 from django.utils.text import get_valid_filename
 
 
+@login_required
 def photo(request, photo_name):
     try:
         photo = Photo.objects.get(photo=photo_name)
@@ -19,8 +20,10 @@ def photo(request, photo_name):
         data = json.loads(request.body)
         photo.caption = data["caption"]
         photo.save()
+        return HttpResponse("{status: 'Success'}")
 
 
+@login_required
 def view_photos(request):
     try:
         if request.user.is_staff:
@@ -37,6 +40,7 @@ def upload_photos(request):
     return render(request, "photo_uploader/upload.html", RequestContext(request))
 
 
+@login_required
 def set_captions(request):
     if request.method == "POST":
         for key in request.POST.keys():
