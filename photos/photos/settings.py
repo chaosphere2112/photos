@@ -27,7 +27,6 @@ INSTALLED_APPS = (
 		'django.contrib.staticfiles',
 		'storages',
 		"photo_uploader",
-		"easyauth",
 		)
 
 AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
@@ -42,7 +41,6 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 AUTHENTICATION_BACKENDS = (
-	"easyauth.middleware.autoauth.AutoAuthBackend",
 	"django.contrib.auth.backends.ModelBackend",
 )
 
@@ -59,7 +57,6 @@ MIDDLEWARE_CLASSES = (
 		'django.contrib.messages.middleware.MessageMiddleware',
 		'django.middleware.clickjacking.XFrameOptionsMiddleware',
 		'django.middleware.security.SecurityMiddleware',
-		'easyauth.middleware.autoauth.AutoAuthMiddleware',
 		)
 
 ROOT_URLCONF = 'photos.urls'
