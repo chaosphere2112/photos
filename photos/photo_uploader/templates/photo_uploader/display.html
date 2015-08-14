@@ -12,7 +12,7 @@
         {% endif %}
             <img src="{{ MEDIA_URL }}{{ photo.photo.name }}">
             <figcaption>
-                {{ photo.caption }}
+                <p>{{ photo.caption }}</p>
             </figcaption>
         </figure>
     {% endfor %}

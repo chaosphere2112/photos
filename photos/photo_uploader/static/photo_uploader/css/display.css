@@ -2,6 +2,17 @@ figure {
 	position:relative;
 }
 
+/*
+	Caption's text; centered horizontally and vertically
+*/
+figcaption>p {
+	text-align: center;
+	position: relative;
+	top: 50%;
+	tranform: translate(0, -50%);
+	font-size: 2em;
+}
+
 figcaption {
 	width:100%;
 	height:100%;
@@ -13,6 +24,7 @@ figcaption {
 
 	display: none;
 }
+
 
 figure:hover figcaption {
 	display: block;
