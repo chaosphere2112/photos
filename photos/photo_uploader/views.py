@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
@@ -6,8 +7,18 @@ import json
 from django.utils.text import get_valid_filename
 
 
-def view_photo(request, photo_name):
-    pass
+def photo(request, photo_name):
+    try:
+        photo = Photo.objects.get(photo=photo_name)
+    except Photo.DoesNotExist:
+        return error()
+    if request.method == "GET":
+        return render(request, "photo_uploader/photo.html", RequestContext(request, {"photo": photo}))
+    elif request.method == "POST":
+        # It's a JSON call
+        data = json.loads(request.body)
+        photo.caption = data["caption"]
+        photo.save()
 
 
 def view_photos(request):
@@ -21,16 +32,15 @@ def view_photos(request):
         return render(request, "photo_uploader/display.html", RequestContext(request, {"photos": []}))
 
 
+@login_required
 def upload_photos(request):
-    if request.user.is_staff == False:
-        return HttpResponse("Access denied")
-
     return render(request, "photo_uploader/upload.html", RequestContext(request))
 
 
 def set_captions(request):
     if request.method == "POST":
         for key in request.POST.keys():
+            print key, request.POST[key]
             if "file_name_" == key[:len("file_name_")]:
                 file_num = key[len("file_name_"):]
                 file_name = get_valid_filename(request.POST[key])
@@ -44,12 +54,13 @@ def set_captions(request):
         return error()
 
 
+@login_required
 def upload_action(request):
     if request.method == "POST":
         for key in request.FILES.keys():
-            new_photo = Photo(photo=request.FILES[key])
+            new_photo = Photo(photo=request.FILES[key], owner=request.user)
             new_photo.save()
-        message = { "status": "success"}
+        message = {"status": "success"}
         return HttpResponse(json.dumps(message), content_type="application/json")
     elif request.method == "DELETE":
         try:

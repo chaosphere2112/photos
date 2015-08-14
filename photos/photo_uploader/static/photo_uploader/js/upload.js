@@ -12,8 +12,7 @@ function init_uploader() {
     template = template.getElementsByClassName("image_wrapper")[0];
 
     var form = document.getElementById("upload_form");
-    var csrf_token = getCookie("csrftoken");
-
+    var csrftoken = getToken()
 
     function dragenter(e) {
         e.stopPropagation();
@@ -108,11 +107,7 @@ function init_uploader() {
 
         xhr.send(formData);
     }
-    function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
-    }
+    
     function removeElementFunc(el) {
         return function(e) {
             form.removeChild(el);

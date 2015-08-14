@@ -1,0 +1,8 @@
+.photo {
+	width:900px;
+	margin:auto;
+}
+
+.photo img {
+	max-width:100%;
+}
