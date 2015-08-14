@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import photo_uploader.urls
 from photo_uploader.views import view_photos
+from views import login, logout
 
 urlpatterns = [
     # Examples:
@@ -11,4 +12,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^photos/', include(photo_uploader.urls)),
     url(r'^$', view_photos),
+    url(r'^login$', login),
+    url(r'^logout$', logout),
 ]

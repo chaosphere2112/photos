@@ -64,7 +64,7 @@ ROOT_URLCONF = 'photos.urls'
 TEMPLATES = [
 		{
 			'BACKEND': 'django.template.backends.django.DjangoTemplates',
-			'DIRS': [],
+			'DIRS': ["photos/templates/photos"],
 			'APP_DIRS': True,
 			'OPTIONS': {
 				'context_processors': [
@@ -94,6 +94,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = "/login"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
